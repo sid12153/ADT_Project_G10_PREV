@@ -1,0 +1,82 @@
+body {
+    font-family: 'Times New Roman', serif;
+    margin: 0;
+    padding: 0;
+    background: url('./images/mainBG.jpeg') no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: white;
+}
+
+.app-title {
+    font-size: 3rem; /* Larger font size */
+    font-weight: bold; /* Bold font weight */
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2; /* Ensure it's above the background image */
+}
+
+.login-container {
+    width: 300px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    position: absolute;
+    right: 10%;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+input[type="text"],
+input[type="password"] {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid black;
+    border-radius: 10px;
+    background: transparent;
+    color: black;
+}
+
+input::placeholder {
+    color: grey;
+}
+
+button {
+    width: calc(100% - 20px);
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    background-color: #000;
+    color: #fff;
+    margin-bottom: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #555;
+}
+
+.register-prompt p {
+    color: black; /* Change text color to black */
+    margin-top: 15px;
+}
+
+.tagline {
+    font-size: 2rem;
+    position: absolute;
+    bottom: 10%; /* Adjust to place it closer to the bottom */
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 1; /* Set to 1 to make it visible */
+    animation: none; 
+}

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login and Registration</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-title"><i>CityLink Rideshare Hub.</i></div>
+    <div class="login-container">
+        <form id="login-form">
+            <h2>Login</h2>
+            <div>
+                <input type="text" id="username" name="username" placeholder="Username" required>
+            </div>
+            <div>
+                <input type="password" id="password" name="password" placeholder="Password" required>
+            </div>
+            <button type="submit">Login as Client</button>
+            <button type="button" onclick="loginAsOwner()">Login as Owner</button>
+            <div class="register-prompt">
+                <p>Not a member? <a href="register.html">Register here</a></p>
+            </div>
+        </form>
+    </div>
+    <div class="tagline">Ride more, worry less</div>
+    <script src="script.js"></script>
+</body>
+</html>

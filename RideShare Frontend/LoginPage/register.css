@@ -1,0 +1,184 @@
+body {
+    font-family: 'Times New Roman', serif;
+    margin: 0;
+    padding: 0;
+    background-color: black;
+    display: flex;
+    justify-content: space-between; /* Adjusted to space-between for left and right sides */
+    align-items: center;
+    height: 100vh;
+    color: white;
+}
+
+.left-side {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    margin-left: 8%; /* Adjust this value as needed to create space on the left */
+}
+
+.right-side {
+    /* Set a max-width if you want to constrain the form width */
+    max-width: 50%;
+    margin-right: 240px; /* Add some margin to the right side */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center the items in the right side */
+}
+
+/* Add styles for .form-section here... */
+
+@media (max-width: 768px) {
+    /* Responsive adjustments */
+    .left-side {
+        display: none; /* Hide the GIF on smaller screens */
+    }
+
+    .right-side {
+        width: 100%;
+        max-width: 100%;
+        align-items: center;
+        margin-right: 0; /* Remove the margin for mobile view */
+    }
+}
+
+.app-title {
+    font-size: 3rem; /* Larger font size */
+    font-weight: bold; /* Bold font weight */
+    position: absolute;
+    top: 0%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2; /* Ensure it's above the background image */
+}
+
+.register-container {
+    width: 80%;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    text-align: center;
+}
+
+input, select, button {
+    width: 90%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    background: white;
+    border-radius: 5px;
+}
+
+button {
+    background-color: black;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #555;
+}
+
+.error-message {
+    color: red;
+    font-size: 0.9rem;
+    display: none;
+}
+
+.section {
+    background: white;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+label {
+    display: block;
+    text-align: left;
+    margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="tel"],
+select {
+    display: block;
+    width: calc(100% - 20px);
+    margin-bottom: 15px;
+}
+
+.terms {
+    color: white;
+    font-size: 0.9rem;
+    text-align: center;
+    margin-top: 15px;
+}
+
+.buttons-container {
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .app-title {
+        font-size: 2rem;
+    }
+    .register-container {
+        width: 95%;
+    }
+}
+
+input:valid {
+    border-color: #28a745;
+}
+
+input:invalid {
+    border-color: #dc3545;
+}
+
+select {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    background: white;
+    color: black;
+}
+
+/* Style adjustments for form-section */
+.form-section {
+    display: none; /* Initially hide all sections */
+    text-align: left; /* Align text to the left */
+    padding: 20px; /* Add some padding */
+    margin-bottom: 20px; /* Add margin to the bottom */
+    border: 1px solid #ccc; /* Add border to the form section */
+    background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white background */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Box shadow for depth */
+}
+
+/* Style for the continue button */
+.form-section button {
+    background-color: #000;
+    color: #fff;
+    font-weight: bold;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.form-section button:hover {
+    background-color: #555;
+}
+
+/* Show the first form-section by default */
+#my-profile-section {
+    display: block;
+}
