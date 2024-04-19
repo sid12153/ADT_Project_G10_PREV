@@ -1,0 +1,100 @@
+body {
+    font-family: 'Times New Roman', serif;
+    margin: 0;
+    padding: 0;
+    background-color: #fffff0; /* Cream background */
+    color: black;
+}
+
+.container {
+    width: 80%;
+    margin: auto;
+}
+
+header {
+    background-color: black; /* Background color for header */
+    color: white; /* Text color for header */
+    padding: 20px 0;
+    text-align: center;
+}
+
+header h1 {
+    font-style: italic; /* Italicized font style */
+    font-weight: bold; /* Bold font weight */
+}
+
+.category {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid black;
+    padding: 20px;
+    margin: 20px 0;
+}
+
+.text-content {
+    width: 50%;
+}
+
+.image-content {
+    width: 50%;
+    display: flex;
+    justify-content: flex-end; /* Align image to the right */
+}
+
+.image-content img {
+    width: auto;
+    max-height: 120px; /* Adjust as needed */
+    border-radius: 10px; /* Rounded corners for images */
+    margin-left: 20px; /* Added space to the left of the image */
+}
+
+.category h2 {
+    font-size: 2rem;
+    color: black;
+}
+
+.category p {
+    font-size: 1rem;
+    margin-bottom: 10px;
+}
+
+.category button {
+    background-color: black;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    border-radius: 5px;
+}
+
+.category button:hover {
+    background-color: #555;
+}
+
+@media (max-width: 768px) {
+    .container {
+        width: 95%;
+    }
+
+    .category {
+        flex-direction: column;
+    }
+
+    .text-content, .image-content img {
+        width: 100%;
+    }
+
+    .category h2 {
+        font-size: 1.5rem;
+    }
+
+    .category button {
+        padding: 8px 16px;
+    }
+    
+    header {
+        padding: 10px 0; /* Adjust padding for smaller screens */
+    }
+}
