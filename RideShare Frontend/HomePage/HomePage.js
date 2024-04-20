@@ -1,42 +1,73 @@
-// Assuming you already have login.js which handles login validation
-// Redirect to home page upon successful login
-function redirectToHome() {
-    // Simulate a login check
-    const username = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
-
-    if (username === 'qwerty' && password === '12345678') {
-        // Replace 'location.href' with the path to your HomePage.html
-        window.location.href = 'HomePage.html';
-    } else {
-        alert('Invalid credentials, please try again.');
-    }
-}
-
-// Call this function when the login form is submitted
-document.getElementById('login-form').addEventListener('submit', function(event) {
-    event.preventDefault();
-    redirectToHome();
-});
-
-document.addEventListener('DOMContentLoaded', (event) => {
-    // This function will handle the login validation
-    function validateLogin(username, password) {
-        if (username === 'qwerty' && password === '12345678') {
-            window.location.href = 'HomePage.html'; // Redirect to the home page
-        } else {
-            alert('Invalid username or password');
-        }
-    }
-
-    // Assuming you have input fields for username and password and a button to login
-    const loginButton = document.getElementById('login-button');
-    if (loginButton) {
-        loginButton.addEventListener('click', () => {
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-            validateLogin(username, password);
+document.addEventListener('DOMContentLoaded', function() {
+    // Function to populate select dropdown
+    function populateSelect(selectId, options) {
+        const select = document.getElementById(selectId);
+        select.innerHTML = ''; // Clear previous options
+        options.forEach(option => {
+            let opt = document.createElement('option');
+            opt.value = option.city; // Assuming the API sends back objects with city property
+            opt.innerHTML = `${option.city}, ${option.state}, ${option.country}`; // Display format
+            select.appendChild(opt);
         });
     }
-});
 
+    // Fetch cities from the backend
+    function fetchCities() {
+        fetch('http://localhost:8000/get_cities', {  // Endpoint to fetch cities
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            populateSelect('departure-city', data.departureCities);
+            populateSelect('arrival-city', data.arrivalCities);
+        })
+        .catch(error => console.error('Error fetching cities:', error));
+    }
+
+    // Function to handle form submission
+    document.getElementById('search-ride-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const departureCity = document.getElementById('departure-city').value;
+        const arrivalCity = document.getElementById('arrival-city').value;
+        const date = document.getElementById('date').value;
+        const seatsRequired = document.getElementById('seats-required').value;
+
+        // Fetch rides based on user inputs
+        fetch(`http://localhost:8000/search_rides?departureCity=${encodeURIComponent(departureCity)}&arrivalCity=${encodeURIComponent(arrivalCity)}&date=${date}&seatsRequired=${seatsRequired}`, {
+            method: 'GET'
+        })
+        .then(response => response.json())
+        .then(rides => {
+            displayRides(rides);
+        })
+        .catch(error => console.error('Error searching rides:', error));
+    });
+
+    // Function to display rides
+    function displayRides(rides) {
+        const ridesList = document.getElementById('rides-list');
+        ridesList.innerHTML = ''; // Clear previous results
+
+        if (rides.length === 0) {
+            ridesList.innerHTML = '<p>No rides available for the selected criteria.</p>';
+            return;
+        }
+
+        rides.forEach(ride => {
+            const div = document.createElement('div');
+            div.className = 'ride';
+            div.innerHTML = `
+                <h3>${ride.vehicle_type} from ${ride.departure_city} to ${ride.arrival_city}</h3>
+                <p>Date: ${ride.departure_date}, Time: ${ride.departure_time} - ${ride.arrival_time}</p>
+                <p>Seats Available: ${ride.available_seats}, Price: ${ride.price} ${ride.currency}</p>
+                <p>Special Amenities: ${ride.special_amenities || 'None'}</p>
+            `;
+            ridesList.appendChild(div);
+        });
+    }
+
+    fetchCities();  // Initial fetch of cities for dropdowns
+});
