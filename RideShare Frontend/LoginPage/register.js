@@ -1,7 +1,35 @@
-document.getElementById('registration-form').onsubmit = function(event) {
-    event.preventDefault();
-    alert('Registration Complete!');
-};
+document.getElementById('registration-form').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent the form from submitting via the browser
+
+    // Gather all data from form fields
+    const formData = {
+        user_id: document.getElementById('username').value, // Make sure to have a username field or similar
+        first_name: document.getElementById('first-name').value,
+        last_name: document.getElementById('last-name').value,
+        email_id: document.getElementById('email').value,
+        contact: document.getElementById('contact-number').value,
+        user_password: document.getElementById('password').value
+    };
+
+    fetch('http://localhost:8000/register_user', { // Update this URL based on your FastAPI server address
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === "Success") {
+            console.log('Registration successful', data);
+            window.location.href = '/path_to_success_page.html'; // Redirect user on success
+        } else {
+            alert('Registration failed: ' + data.message);
+        }
+    })
+    .catch(error => console.error('Error:', error));
+});
+
 
 // Initialize the form by hiding all sections except the first
 document.querySelectorAll('.form-section').forEach(function(section, index) {
@@ -29,25 +57,6 @@ const usStates = [
 ];
 const countries = ["USA", "UK", "India", "UAE"];
 
-// Function to add options to select dropdown
-function addOptions(selectId, optionsArray) {
-    const select = document.getElementById(selectId);
-    // Ensure the select element exists
-    if (select) {
-        optionsArray.forEach(option => {
-            let optionElement = document.createElement("option");
-            optionElement.value = option;
-            optionElement.textContent = option;
-            select.appendChild(optionElement);
-        });
-    }
-}
-
-// Populate dropdowns on window load
-window.onload = function() {
-    addOptions("issuing-country", countries);
-    addOptions("issuing-authority", usStates);
-};
 
 function showNext(sectionId) {
     var currentSection = document.querySelector('.form-section:not([style*="display: none"])');
