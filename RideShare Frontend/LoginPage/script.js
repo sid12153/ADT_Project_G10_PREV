@@ -22,12 +22,28 @@ function redirectToHome() {
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
 
-    if (username === 'qwerty' && password === '12345678') {
-        // Replace 'location.href' with the path to your HomePage.html
-        window.location.href = 'HomePage.html';
-    } else {
-        alert('Invalid credentials, please try again.');
-    }
+    fetch('http://localhost:8000/login_check', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            user_id: username,
+            user_password: password
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === "Success") {
+            window.location.href = 'HomePage.html'; // Redirect to home page on success
+        } else {
+            alert('Invalid credentials, please try again.');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Failed to login. Please try again.');
+    });
 }
 
 // Call this function when the login form is submitted
