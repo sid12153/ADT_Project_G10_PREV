@@ -1,4 +1,5 @@
 fastapi==0.110.2
 uvicorn==0.18.2  # Assuming you need an ASGI server for FastAPI
 psycopg2-binary==2.9.9
-pydantic
+pydantic==1.8.2
+email-validator==1.1.3
