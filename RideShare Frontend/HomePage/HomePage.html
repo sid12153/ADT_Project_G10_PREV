@@ -11,62 +11,23 @@
         <header>
             <h1>CityLink Rideshare Hub</h1>
         </header>
-        <h1><b>Compare Rental Car Sizes and Classes</b></h2>
-        <section class="category" id="cars">
-            <div class="text-content">
-                <h2>Cars</h2>
-                <p>Choose from a variety of rental cars in this category including economy, full-size or luxury sedans.</p>
-                <button onclick="window.location.href='Cars.html'">View All 20 Car Classes</button>
+        <h2><b>Search for a Ride</b></h2>
+        <form id="search-ride-form">
+            <label for="departure-city">Departure City:</label>
+            <select id="departure-city" required></select>
 
-            </div>
-            <div class="image-content">
-                <img src="images/Cars.png" alt="Cars">
-            </div>
-        </section>
+            <label for="arrival-city">Arrival City:</label>
+            <select id="arrival-city" required></select>
 
-        <section class="category" id="suvs">
-            <div class="text-content">
-                <h2>SUVs</h2>
-                <p>Our SUVs offer plenty of flexibility with seating capacity, power, and luggage room.</p>
-                <button>View All 12 SUV Classes</button>
-            </div>
-            <div class="image-content">
-                <img src="images/SUVs.png" alt="SUVs">
-            </div>
-        </section>
+            <label for="date">Date:</label>
+            <input type="date" id="date" required>
 
-        <section class="category" id="trucks">
-            <div class="text-content">
-                <h2>Trucks</h2>
-                <p>Our pickup trucks have the space, power and durability ideal for your needs.</p>
-                <button>View All 2 Truck Classes</button>
-            </div>
-            <div class="image-content">
-                <img src="images/Trucks.png" alt="Trucks">
-            </div>
-        </section>
+            <label for="seats-required">Seats Required:</label>
+            <input type="number" id="seats-required" min="1" required>
 
-        <section class="category" id="vans">
-            <div class="text-content">
-                <h2>Vans</h2>
-                <p>Our minivans and passenger vans can seat up to 7 and 15 passengers respectively.</p>
-                <button>View All 6 Van Classes</button>
-            </div>
-            <div class="image-content">
-                <img src="images/Vans.png" alt="Vans">
-            </div>
-        </section>
-
-        <section class="category" id="luxury-cars">
-            <div class="text-content">
-                <h2>Luxury Cars</h2>
-                <p>Our luxury rental cars have plenty of power, modern technology, and creature comforts.</p>
-                <button>View All 15 Luxury Car Classes</button>
-            </div>
-            <div class="image-content">
-                <img src="images/LuxuryCars.png" alt="Luxury Cars">
-            </div>
-        </section>
+            <button type="submit">Search Rides</button>
+        </form>
+        <div id="rides-list"></div>
     </div>
     <script src="HomePage.js"></script>
 </body>
