@@ -159,20 +159,32 @@ if st.session_state['logged_in']:
             st.error("Failed to fetch reservations.")
 
     if finish_ride_button:
-        # Implement functionality to finish a ride
-        with st.form("finish_ride_form"):
-            ride_id = st.number_input("Ride ID", min_value=1)
-            submit_button = st.form_submit_button("Finish Ride")
+    # First, fetch the rides to display them
+    	rides_response = api_post("fetch_rides", {"user_id": user_id})
+    	if rides_response.status_code == 200:
+        	rides_data = rides_response.json()
+        	st.subheader("Finish a Ride:")
+        	for ride in rides_data:
+            		with st.container():
+                	# Display ride details
+                		st.text(f"Ride ID: {ride['Ride ID']}")
+                		st.text(f"From: {ride['Departure City']} to {ride['Arrival City']}")
+                		st.text(f"Date: {ride['Departure Date']} Time: {ride['Departure Time']}")
+                
+                		# Add a button to finish the ride
+                		if st.button("Finish Ride", key=f"finish_button_{ride['Ride ID']}"):
+                    			finish_ride_response = api_put("close_ride", {
+                        			"ride_id": ride['Ride ID'],
+                        		"active": False  # Set the ride to inactive
+                    			})
+                    			if finish_ride_response.status_code == 200:
+                        			st.success(f"Ride {ride['Ride ID']} finished successfully")
+                    			else:
+                        			st.error("Failed to finish ride.")
+		                st.markdown("---")  # Separator between entries
+    	else:
+        	st.error("Failed to fetch rides.")
 
-            if submit_button:
-                finish_ride_response = api_put("close_ride", {
-                    "ride_id": ride_id,
-                    "active": False  # Set the ride to inactive
-                })
-                if finish_ride_response.status_code == 200:
-                    st.success("Ride finished successfully")
-                else:
-                    st.error("Failed to finish ride.")
 
     if reset_password_button:
         with st.form("reset_password_form", clear_on_submit=True):
