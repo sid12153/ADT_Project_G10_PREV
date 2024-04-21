@@ -3,7 +3,7 @@ import requests
 import json
 
 # Configuration for the API server endpoint
-API_BASE_URL = "http://127.0.0.1:6012"
+API_BASE_URL = "http://127.0.0.1:8000"
 
 def api_post(endpoint, data):
     response = requests.post(f"{API_BASE_URL}/{endpoint}", json=data)
